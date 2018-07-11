@@ -13,6 +13,12 @@ class NeuralNetwork:
             a = self.activation(np.matmul(w, a) + b)
             return a
 
+    def accuracy(self, images, labels):
+        predictions = self.prediction(images)
+        num_correct = sum([np.argmax(a) == np.argmax(b) for a, b in zip(predictions, labels)])
+        total = len(images)
+        print('{0}/{1} accuracy: {2}%'.format(num_correct, total, (num_correct / total) * 100))
+
     @staticmethod
     def activation(x):
         return 1 / (1 + np.exp(-x))
